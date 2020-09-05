@@ -12,6 +12,7 @@ import (
 
 var (
 	port = flag.Int("port", 3000, "port to listen on")
+	host = flag.String("host", "localhost", "host/ip to listen on")
 )
 
 func check(e error) {
@@ -55,7 +56,8 @@ func hello(w http.ResponseWriter, req *http.Request) {
 func main() {
 	flag.Parse()
 
-	addr := fmt.Sprintf("localhost:%d", *port)
+	addr := fmt.Sprintf("%s:%d", *host, *port)
+
 	fmt.Printf("Listening on %s\n", addr)
 
 	http.HandleFunc("/", hello)
